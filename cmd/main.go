@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
@@ -26,6 +28,8 @@ func main() {
 	engine.Static("/asset/css", "asset/css")
 
 	engine.GET("/", func(c *gin.Context) {
-
+		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
+
+	engine.Run(":8080")
 }
