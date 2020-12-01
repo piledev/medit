@@ -23,13 +23,15 @@ func gormConnect() *gorm.DB {
 }
 
 func main() {
-	engine := gin.Default()
-	engine.LoadHTMLGlob("asset/html/*.html")
-	engine.Static("/asset/css", "asset/css")
+	router := gin.Default()
+	// go run 実行フォルダからの相対パス。
+	router.LoadHTMLGlob("./asset/html/*.html")
+	// 第一引数にはプロジェクトルートからの絶対パス。第二引数にはgo run 実行フォルダからの相対パス。
+	router.Static("/backend/asset/css", "./asset/css")
 
-	engine.GET("/", func(c *gin.Context) {
+	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 
-	engine.Run(":8080")
+	router.Run(":8080")
 }
