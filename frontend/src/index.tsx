@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+// import './index.css';
+import StackHeatmap from './StackHeatmap';
+import Profile from './Profile'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Profile />
+    <StackHeatmap />
   </React.StrictMode>,
   document.getElementById('root')
 );

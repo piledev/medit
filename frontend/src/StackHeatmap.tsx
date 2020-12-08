@@ -1,12 +1,12 @@
-import React from 'react';
+// import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
 import 'react-calendar-heatmap/dist/styles.css';
-// import './styles.css';
+import './StackHeatmap.css'
 
 const today = new Date();
 
-function App() {
+function StackHeatmap() {
   const randomValues = getRange(365).map(index => {
     return {
       date: shiftDate(today, -index),
@@ -14,9 +14,7 @@ function App() {
     };
   });
   return (
-    <div>
-      <h1>medit.</h1>
-      <p>meditation recorder for meditation lovers.</p>
+    <div className="stack-heatmap">
       <CalendarHeatmap
         startDate={shiftDate(today, -365)}
         endDate={today}
@@ -29,9 +27,8 @@ function App() {
         }}
         tooltipDataAttrs={(value: any) => {
           return {
-            'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${
-              value.count
-            }`,
+            'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count
+              }`,
           };
         }}
         showWeekdayLabels={true}
@@ -49,11 +46,11 @@ function shiftDate(date: Date, numDays: number) {
 }
 
 function getRange(count: number) {
-  return Array.from({ length: count },(_,i) => i);
+  return Array.from({ length: count }, (_, i) => i);
 }
 
 function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export default App;
+export default StackHeatmap;
