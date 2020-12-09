@@ -7,9 +7,9 @@ import React from 'react'
 function Profile() {
     return (
         <div className="profile">
-            <img src="" alt=""/>
-            <h1>hoge</h1>
-            <h2>fuga</h2>
+            <img src="../public/meditation.jpg" alt="gravatar"/>
+            <h1>a meditator</h1>
+            <h2>Silver Meditator</h2>
         </div>
     )
 }

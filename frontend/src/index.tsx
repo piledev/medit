@@ -4,11 +4,13 @@ import ReactDOM from 'react-dom';
 import StackHeatmap from './StackHeatmap';
 import Profile from './Profile'
 import reportWebVitals from './reportWebVitals';
+import Button from '@material-ui/core/Button'
 
 ReactDOM.render(
   <React.StrictMode>
     <Profile />
     <StackHeatmap />
+    <Button variant="contained" color="primary">click</Button>
   </React.StrictMode>,
   document.getElementById('root')
 );
