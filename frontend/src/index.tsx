@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
-import StackHeatmap from './StackHeatmap';
-import Profile from './Profile'
 import reportWebVitals from './reportWebVitals';
 import AppBar from './AppBar';
+import Recorder from './Recorder';
 
 ReactDOM.render(
   <React.StrictMode>
     <AppBar />
-    
+    <Recorder />
   </React.StrictMode>,
   document.getElementById('root')
 );
