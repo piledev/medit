@@ -1,6 +1,9 @@
-.slider {
+slider {
     width: 300,
 }
 input {
     width: 42;
+}
+h3 {
+    color: red;
 }

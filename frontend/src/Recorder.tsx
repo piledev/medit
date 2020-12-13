@@ -1,8 +1,5 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import Input from '@material-ui/core/Input';
+import { Grid, Typography, Slider, Input } from '@material-ui/core';
 // import MuiIcons from '@material-ui/icons';
 import './Recorder.css';
 
@@ -13,12 +10,12 @@ function valuetext(value: number) {
 export default function Recorder() {
     return (
         <div className="recorder">
-            <Typography id="discrete-slider" gutterBottom>
+            <Typography id="discrete-slider" variant="h3" component="h3" gutterBottom>
                 Set a timer.
             </Typography>
             <Grid container spacing={2} alignItems="center">
                 <Grid item>
-                    <Typography id="minutes" gutterBottom>minutes:</Typography>
+                    <Typography id="minutes" variant="h6" gutterBottom>minutes:</Typography>
                 </Grid>
                 <Grid item xs>
                     <InputSlider />
