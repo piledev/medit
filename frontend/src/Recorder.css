@@ -1,9 +1,13 @@
-slider {
+.MuiGrid-item {
     width: 300,
+}
+.MuiButton-colorInherit {
+    padding-top: 30px;
 }
 input {
     width: 42;
 }
 h3 {
-    color: red;
+    color: rgb(94, 92, 92);
+    padding-top: 30px;
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Grid, Typography, Slider, Input } from '@material-ui/core';
+import React, { useState } from 'react'
+import { Grid, Typography, Slider, Input, Button } from '@material-ui/core';
 // import MuiIcons from '@material-ui/icons';
 import './Recorder.css';
 
@@ -21,9 +21,16 @@ export default function Recorder() {
                     <InputSlider />
                 </Grid>
             </Grid>
+            <ChangeModeButton />
         </div>
     )
 };
+
+function ChangeModeButton() {
+    const [mode, setMode] = useState(false);
+
+    return <Button variant="contained" onClick={() => setMode((m) => !m)}>{mode ? "Set a timer" : "Start Meditation"}</Button>
+}
 
 // function InputSlider(minvalue: number = 0, maxvalue: number = 59, stepValue: number = 1) {
 function InputSlider() {
