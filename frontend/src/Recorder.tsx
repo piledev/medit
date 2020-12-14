@@ -13,14 +13,10 @@ export default function Recorder() {
             <Typography id="discrete-slider" variant="h3" component="h3" gutterBottom>
                 Set a timer.
             </Typography>
-            <Grid container spacing={2} alignItems="center">
-                <Grid item>
-                    <Typography id="minutes" variant="h6" gutterBottom>minutes:</Typography>
-                </Grid>
-                <Grid item xs>
-                    <InputSlider />
-                </Grid>
-            </Grid>
+            <InputSlider label="hour" step={1} max={23} />
+            <InputSlider label="minute" step={1} max={59} />
+            <InputSlider label="second" step={1} max={59} />
+            <h1> </h1>
             <ChangeModeButton />
         </div>
     )
@@ -33,7 +29,7 @@ function ChangeModeButton() {
 }
 
 // function InputSlider(minvalue: number = 0, maxvalue: number = 59, stepValue: number = 1) {
-function InputSlider() {
+const InputSlider = (props: any) => {
     const [value, setValue] = React.useState(0);
 
     const handleSliderChange = (event: any, newValue: any) => {
@@ -47,14 +43,17 @@ function InputSlider() {
     const handleBlur: any = () => {
         if (value < 0) {
             setValue(0);
-        } else if (value > 60) {
-            setValue(60);
+        } else if (value > props.max) {
+            setValue(props.max);
         }
     }
 
     return (
         <div className="slider">
             <Grid container spacing={2} alignItems="center">
+                <Grid item xs={1}>
+                    <Typography id="inputsliderlabel" variant="h6" gutterBottom align="right">{props.label}</Typography>
+                </Grid>
                 <Grid item>
                     <Input
                         className="input"
@@ -63,15 +62,15 @@ function InputSlider() {
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                         inputProps={{
-                            step: 1,
+                            step: props.step,
                             min: 0,
-                            max: 59,
+                            max: props.max,
                             type: 'number',
                             'aria-labelledby': 'input-slider',
                         }}
                     />
                 </Grid>
-                <Grid item xs>
+                <Grid item xs={4}>
                     <Slider
                         value={typeof value === 'number' ? value : 0}
                         onChange={handleSliderChange}
@@ -79,13 +78,15 @@ function InputSlider() {
                         defaultValue={0}
                         getAriaValueText={valuetext}
                         valueLabelDisplay="auto"
-                        step={1}
+                        step={props.step}
                         marks
                         min={0}
-                        max={59}
+                        max={props.max}
                     />
                 </Grid>
             </Grid>
+
+
         </div>
     )
 }
