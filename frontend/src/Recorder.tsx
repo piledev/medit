@@ -10,27 +10,49 @@ function valuetext(value: number) {
 export default function Recorder() {
     return (
         <div className="recorder">
-            <Typography id="discrete-slider" variant="h3" component="h3" gutterBottom>
-                Set a timer.
+             <Typography id="Settings-label" variant="h3" component="h3" gutterBottom>
+                Settings
             </Typography>
-            <InputSlider label="hour" step={1} max={23} />
-            <InputSlider label="minute" step={1} max={59} />
-            <InputSlider label="second" step={1} max={59} />
+            <Typography id="meditation-label" variant="h5" component="h5" gutterBottom>
+                Meditation time
+            </Typography>
+            <InputSlider label="H" step={1} max={23} default={0} />
+            <InputSlider label="M" step={1} max={59} default={15} />
+            <InputSlider label="S" step={1} max={59} default={0} />
+
+            <Typography id="preparation-label" variant="h5" component="h5" gutterBottom>
+                Preparation time
+            </Typography>
+            <InputSlider label="S" step={1} max={59} default={5}/>
             <h1> </h1>
-            <ChangeModeButton />
+            <Grid container spacing={2} alignItems="center">
+                <Grid item >
+                    <SettingRecordButton />
+                </Grid>
+                <Grid item>
+                    <ChangeModeButton />
+                </Grid>
+            </Grid>
         </div>
     )
 };
 
+
+function SettingRecordButton() {
+    const [state, setState] = useState(false);
+
+    return <Button variant="contained" onClick={() => setState((m) => !m)}>Save to presets</Button>
+}
+
 function ChangeModeButton() {
     const [mode, setMode] = useState(false);
 
-    return <Button variant="contained" onClick={() => setMode((m) => !m)}>{mode ? "Set a timer" : "Start Meditation"}</Button>
+    return <Button variant="contained" onClick={() => setMode((m) => !m)}>{mode ? "Settings" : "Meditate"}</Button>
 }
 
 // function InputSlider(minvalue: number = 0, maxvalue: number = 59, stepValue: number = 1) {
 const InputSlider = (props: any) => {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(props.default);
 
     const handleSliderChange = (event: any, newValue: any) => {
         setValue(newValue);
@@ -75,11 +97,10 @@ const InputSlider = (props: any) => {
                         value={typeof value === 'number' ? value : 0}
                         onChange={handleSliderChange}
                         aria-labelledby="input-slider"
-                        defaultValue={0}
+                        defaultValue={props.default}
                         getAriaValueText={valuetext}
                         valueLabelDisplay="auto"
                         step={props.step}
-                        marks
                         min={0}
                         max={props.max}
                     />

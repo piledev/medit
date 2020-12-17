@@ -11,3 +11,15 @@ h3 {
     color: rgb(94, 92, 92);
     padding-top: 30px;
 }
+h5 {
+    color: rgb(94, 92, 92);
+    padding-top: 30px;
+}
+h6 {
+    color: rgb(94, 92, 92);
+
+}
+
+.slider {
+    align-self: center;
+}
