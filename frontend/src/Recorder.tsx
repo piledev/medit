@@ -10,7 +10,7 @@ function valuetext(value: number) {
 export default function Recorder() {
     return (
         <div className="recorder">
-             <Typography id="Settings-label" variant="h3" component="h3" gutterBottom>
+            <Typography id="Settings-label" variant="h3" component="h3" gutterBottom>
                 Settings
             </Typography>
             <Typography id="meditation-label" variant="h5" component="h5" gutterBottom>
@@ -23,7 +23,7 @@ export default function Recorder() {
             <Typography id="preparation-label" variant="h5" component="h5" gutterBottom>
                 Preparation time
             </Typography>
-            <InputSlider label="S" step={1} max={59} default={5}/>
+            <InputSlider label="S" step={1} max={59} default={5} />
             <h1> </h1>
             <Grid container spacing={2} alignItems="center">
                 <Grid item >
