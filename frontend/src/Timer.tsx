@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Timer = (props) => {
+interface TimerProps {
+    hour: number,
+    minute: number,
+    second: number,
+};
+
+const Timer = (props: TimerProps) => {
     
 };
 export default Timer;
