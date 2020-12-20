@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid } from '@material-ui/core'
 
 interface TimerProps {
     hour: number,
@@ -7,6 +8,6 @@ interface TimerProps {
 };
 
 const Timer = (props: TimerProps) => {
-    
+
 };
 export default Timer;
