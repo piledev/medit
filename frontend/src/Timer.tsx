@@ -10,7 +10,9 @@ interface TimerProps {
 const Timer = (props: TimerProps) => {
     return (
         <div className="timer">
-            <h1>Timer</h1> 
+            <h1>{props.hour}</h1> 
+            <h2>{props.minute}</h2>
+            <h3>{props.second}</h3>
         </div>
     );
 };
