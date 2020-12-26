@@ -13,6 +13,7 @@ const Timer = (props: TimerProps) => {
             <h1>{props.hour}</h1> 
             <h2>{props.minute}</h2>
             <h3>{props.second}</h3>
+            <h1>{props.hour}</h1> 
         </div>
     );
 };
