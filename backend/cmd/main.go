@@ -15,8 +15,8 @@ func gormConnect() *gorm.DB {
 	DBNAME := "tododb"
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
 
-	db, err := gorm.Open(DBMS, CONNECT)
-	if err != nil {
+  db, err := gorm.Open(DBMS, CONNECT)	
+  if err != nil {
 		panic(err.Error())
 	}
 	return db

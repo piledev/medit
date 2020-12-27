@@ -19,7 +19,6 @@ export default function Recorder() {
             <InputSlider label="H" step={1} max={23} default={0} />
             <InputSlider label="M" step={1} max={59} default={15} />
             <InputSlider label="S" step={1} max={59} default={0} />
-
             <Typography id="preparation-label" variant="h5" component="h5" gutterBottom>
                 Preparation time
             </Typography>
