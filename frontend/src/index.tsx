@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <AppBar />
     {/* <Recorder /> */}
-    <Timer hour={0} minute={1} second={0} countdownsec={5} />
+    <Timer hour={0} minute={1} second={0} prepSecond={5} />
   </React.StrictMode>,
   document.getElementById("root")
 );
