@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-import AppBar from './AppBar';
-import Recorder from './Recorder';
+import React from "react";
+import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
+import AppBar from "./AppBar";
+import Recorder from "./Recorder";
+import Timer from "./Timer";
 
 ReactDOM.render(
   <React.StrictMode>
     <AppBar />
-    <Recorder />
+    {/* <Recorder /> */}
+    <Timer hour={0} minute={1} second={0} countdownsec={5} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
