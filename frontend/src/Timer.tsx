@@ -22,17 +22,23 @@ interface TimerProps {
 //
 //
 const Timer = (props: TimerProps) => {
-  let hour = props.hour;
-  let minute = props.minute;
-  let second = props.second;
-  let prepSecond = props.prepSecond;
+  /* [remaining, setRemaining] = useState(0); */
+
+  let prepStart: number = Date.now();
+  let meditStart: number = prepStart + props.prepSecond * 1000;
+  let meditGoal: number =
+    meditStart +
+    props.hour * 3600 * 1000 +
+    props.minute * 60 * 1000 +
+    props.second * 1000;
+
   // 現在時刻よりゴールを算出する
   //
   return (
     <div className="timer">
-      <h1>{props.hour}</h1>
-      <h2>{props.minute}</h2>
-      <h1>{props.hour}</h1>
+      <h1>{prepStart}</h1>
+      <h1>{meditStart}</h1>
+      <h1>{meditGoal}</h1>
     </div>
   );
 };
