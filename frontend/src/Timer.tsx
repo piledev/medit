@@ -22,8 +22,6 @@ interface TimerProps {
 //
 //
 const Timer = (props: TimerProps) => {
-  /* [remaining, setRemaining] = useState(0); */
-
   let prepStart: number = Date.now();
   let meditStart: number = prepStart + props.prepSecond * 1000;
   let meditGoal: number =
@@ -32,13 +30,14 @@ const Timer = (props: TimerProps) => {
     props.minute * 60 * 1000 +
     props.second * 1000;
 
-  // 現在時刻よりゴールを算出する
-  //
+  [distance, setDistance] = useState(meditGoal - meditStart);
+
+  const countdown = () => {
+    setInterval(() => {}, 1000);
+  };
   return (
     <div className="timer">
-      <h1>{prepStart}</h1>
-      <h1>{meditStart}</h1>
-      <h1>{meditGoal}</h1>
+      <h1>{ditance}</h1>
     </div>
   );
 };
