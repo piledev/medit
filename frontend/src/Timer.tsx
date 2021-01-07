@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
+import { display } from "@material-ui/system";
 
 interface TimerProps {
   hour: number;
@@ -22,6 +23,8 @@ interface TimerProps {
 //
 //
 const Timer = (props: TimerProps) => {
+  const [display, setDisplay] = useState(String(props.prepSecond));
+
   let prepStart: number = Date.now();
   let meditStart: number = prepStart + props.prepSecond * 1000;
   let meditGoal: number =
@@ -29,15 +32,29 @@ const Timer = (props: TimerProps) => {
     props.hour * 3600 * 1000 +
     props.minute * 60 * 1000 +
     props.second * 1000;
+  let distance: number = meditGoal - meditStart;
 
-  [distance, setDistance] = useState(meditGoal - meditStart);
+  /* const countdown = () => { */
+  let x = setInterval(() => {
+    if (Date.now() <= meditStart) {
+      // 瞑想開始前（カウントダウン）
+      setDisplay(String(Math.floor((meditStart - Date.now()) / 1000)));
+    } else if (Date.now() <= meditGoal) {
+      // 瞑想開始後（カウントダウン）
+      distance = meditGoal - Date.now();
+      let h: number = Math.floor(distance / (60 * 60 * 1000));
+      let m: number = Math.floor((distance - h) / (60 * 1000));
+      let s: number = Math.floor((distance - h - m) / 1000);
+      setDisplay(String(h + ":" + m + ":" + s));
+    } else {
+      clearInterval(x);
+    }
+  }, 1000);
+  /* }; */
 
-  const countdown = () => {
-    setInterval(() => {}, 1000);
-  };
   return (
     <div className="timer">
-      <h1>{ditance}</h1>
+      <h1>{display}</h1>
     </div>
   );
 };
