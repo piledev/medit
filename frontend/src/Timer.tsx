@@ -23,7 +23,8 @@ interface TimerProps {
 //
 //
 const Timer = (props: TimerProps) => {
-  const [display, setDisplay] = useState(String(props.prepSecond));
+  /* const [display, setDisplay] = useState(String(props.prepSecond)); */
+  const [record, setRecord] = useState(-1 * props.prepSecond);
 
   let prepStart: number = Date.now();
   let meditStart: number = prepStart + props.prepSecond * 1000;
@@ -33,24 +34,26 @@ const Timer = (props: TimerProps) => {
     props.minute * 60 * 1000 +
     props.second * 1000;
   let distance: number = meditGoal - meditStart;
+  let display: string = String(props.prepSecond);
 
-  /* const countdown = () => { */
   let x = setInterval(() => {
+    setRecord(Math.floor((Date.now() - meditStart) / 1000));
     if (Date.now() <= meditStart) {
-      // 瞑想開始前（カウントダウン）
-      setDisplay(String(Math.floor((meditStart - Date.now()) / 1000)));
+      // 瞑想開始前
+      display = String(-1 * record);
+      console.log("prep: " + display);
     } else if (Date.now() <= meditGoal) {
-      // 瞑想開始後（カウントダウン）
+      // 瞑想開始後
       distance = meditGoal - Date.now();
       let h: number = Math.floor(distance / (60 * 60 * 1000));
       let m: number = Math.floor((distance - h) / (60 * 1000));
       let s: number = Math.floor((distance - h - m) / 1000);
-      setDisplay(String(h + ":" + m + ":" + s));
+      display = String(h + ":" + m + ":" + s);
+      console.log("medit: " + display);
     } else {
       clearInterval(x);
     }
   }, 1000);
-  /* }; */
 
   return (
     <div className="timer">
