@@ -23,19 +23,42 @@ interface TimerProps {
 //
 //
 const Timer = (props: TimerProps) => {
-  const [record, setRecord] = useState(0);
-  const myname = "rendered " + String(Math.floor(Date.now() / 1000) % 100);
-  console.log(myname);
-  let count = 0;
+  const [record, setRecord] = useState(-1 * props.prepSecond);
+
+  let prepStart: number = Date.now();
+  let meditStart: number = prepStart + props.prepSecond * 1000;
+  let meditGoal: number =
+    meditStart +
+    props.hour * 3600 * 1000 +
+    props.minute * 60 * 1000 +
+    props.second * 1000;
+  let distance: number = meditGoal - meditStart;
+  let display: string = String(props.prepSecond);
+
   let x = setInterval(() => {
-    count += 1;
-    setRecord(count);
-    console.log(myname + ":" + record);
-  }, 10000);
+    setRecord(Date.now());
+    setRecord(Math.floor((Date.now() - meditStart) / 1000));
+    if (Date.now() <= meditStart) {
+      // 瞑想開始前
+      display = String(-1 * record);
+      console.log("prep: " + display);
+    } else if (Date.now() <= meditGoal) {
+      // 瞑想開始後
+      distance = meditGoal - Date.now();
+      let h: number = Math.floor(distance / (60 * 60 * 1000));
+      let m: number = Math.floor((distance - h) / (60 * 1000));
+      let s: number = Math.floor((distance - h - m) / 1000);
+      display = String(h + ":" + m + ":" + s);
+      console.log("medit: " + display);
+    } else {
+      clearInterval(x);
+      console.log("clearInterval: " + display);
+    }
+  }, 5000);
 
   return (
     <div className="timer">
-      <h1>{myname}</h1>
+      <h1>{record}</h1>
     </div>
   );
 };
