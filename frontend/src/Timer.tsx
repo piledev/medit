@@ -24,6 +24,11 @@ interface TimerProps {
 //
 const Timer = (props: TimerProps) => {
   const [record, setRecord] = useState(0);
+
+  useEffect(() => {
+    if (!timeLeft) return;
+  });
+
   const myname = "rendered " + String(Math.floor(Date.now() / 1000) % 100);
   console.log(myname);
   let count = 0;
