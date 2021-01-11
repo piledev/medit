@@ -1,6 +1,7 @@
 //import React from 'react'
 import { Avatar } from "@material-ui/core";
 import "./Profile.css";
+import StackHeatMap from "./StackHeatmap";
 
 function Profile() {
   return (
@@ -9,6 +10,7 @@ function Profile() {
       <Avatar src="meditation.jpg" alt="avatar" />
       <h1>a meditator</h1>
       <h2>Silver Meditator</h2>
+      <StackHeatMap />
     </div>
   );
 }

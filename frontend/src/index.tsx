@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import AppBar from "./AppBar";
+import Profile from "./Profile";
 import Recorder from "./Recorder";
 import Timer from "./Timer";
 
 ReactDOM.render(
   <React.StrictMode>
     <AppBar />
+    {/* <Profile /> */}
     {/* <Recorder /> */}
     <Timer hour={0} minute={1} second={0} prepSecond={5} />
   </React.StrictMode>,

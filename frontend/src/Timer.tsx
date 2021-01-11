@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { display } from "@material-ui/system";
 
@@ -23,27 +23,43 @@ interface TimerProps {
 //
 //
 const Timer = (props: TimerProps) => {
-  const [record, setRecord] = useState(0);
-
+  let prepLength: number = props.prepSecond;
+  let meditLength: number =
+    props.hour * 3600 + props.minute * 60 + props.second;
+  const [timeLeft, setTimeLeft] = useState(prepLength + meditLength);
+  let mDisplay =
+    String("00" + props.hour).slice(-2) +
+    ":" +
+    String("00" + props.minute).slice(-2) +
+    ":" +
+    String("00" + props.second).slice(-2);
+  /* let display: string = psec === 0 ? String() : String(psec); */
+  // 初回レンダー時、または timeLeft 変更時に実行。
   useEffect(() => {
     if (!timeLeft) return;
-  });
 
-  const myname = "rendered " + String(Math.floor(Date.now() / 1000) % 100);
-  console.log(myname);
-  let count = 0;
-  let x = setInterval(() => {
-    count += 1;
-    setRecord(count);
-    console.log(myname + ":" + record);
-  }, 10000);
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+
+    // cleanup: clear interval on re-render to avoid memory leaks
+    return () => clearInterval(intervalId);
+  }, [timeLeft]);
 
   return (
-    <div className="timer">
-      <h1>{myname}</h1>
+    <div>
+      <h1>{timeLeft}</h1>
     </div>
   );
 };
 export default Timer;
 
-// js の clearInterval と setInterval(handler) を使ったらできそう。
+// getDisplay:
+// meditLength: settings 画面で設定された瞑想時間（秒）
+// timeLeft: 瞑想完了までの残り時間（秒）
+const getDisplay = (meditLength: number, timeLeft: number) => {
+  // 準備中の場合
+  if (meditLength <= timeLeft) {
+    //
+  }
+};
