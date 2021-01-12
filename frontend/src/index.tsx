@@ -11,7 +11,7 @@ ReactDOM.render(
     <AppBar />
     {/* <Profile /> */}
     {/* <Recorder /> */}
-    <Timer hour={0} minute={1} second={0} prepSecond={5} />
+    <Timer hour={0} minute={0} second={10} prepSecond={5} />
   </React.StrictMode>,
   document.getElementById("root")
 );

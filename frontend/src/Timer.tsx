@@ -27,16 +27,12 @@ const Timer = (props: TimerProps) => {
   let meditLength: number =
     props.hour * 3600 + props.minute * 60 + props.second;
   const [timeLeft, setTimeLeft] = useState(prepLength + meditLength);
-  let mDisplay =
-    String("00" + props.hour).slice(-2) +
-    ":" +
-    String("00" + props.minute).slice(-2) +
-    ":" +
-    String("00" + props.second).slice(-2);
+  const [isStopped, setIsStopped] = useState(false);
+
   /* let display: string = psec === 0 ? String() : String(psec); */
   // 初回レンダー時、または timeLeft 変更時に実行。
   useEffect(() => {
-    if (!timeLeft) return;
+    if (isStopped) return;
 
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
@@ -48,9 +44,15 @@ const Timer = (props: TimerProps) => {
 
   return (
     <div>
-      <h1>{timeLeft}</h1>
+      <h1>{getDisplay(meditLength, timeLeft)}</h1>
     </div>
   );
+};
+Timer.defaultProps = {
+  hour: 0,
+  minute: 0,
+  second: 0,
+  prepSecond: 0,
 };
 export default Timer;
 
@@ -58,8 +60,44 @@ export default Timer;
 // meditLength: settings 画面で設定された瞑想時間（秒）
 // timeLeft: 瞑想完了までの残り時間（秒）
 const getDisplay = (meditLength: number, timeLeft: number) => {
+  let display = "";
   // 準備中の場合
-  if (meditLength <= timeLeft) {
-    //
+  if (timeLeft > meditLength) {
+    display = String(timeLeft - meditLength);
+    return display;
   }
+  // 瞑想中の場合
+  /* } else if (timeLeft > 0) { */
+  /*   let hour = Math.floor(timeLeft / 3600); */
+  /*   let minute = Math.floor((timeLeft % 3600) / 60); */
+  /*   let second = Math.floor(timeLeft % 60); */
+  /*   display = */
+  /*     String("00" + hour).slice(-2) + */
+  /*     ":" + */
+  /*     String("00" + minute).slice(-2) + */
+  /*     ":" + */
+  /*     String("00" + second).slice(-2); */
+  /*   // 瞑想を延長している場合 */
+  /* } else { */
+  /*   let hour = Math.floor(-timeLeft / 3600); */
+  /*   let minute = Math.floor((-timeLeft % 3600) / 60); */
+  /*   let second = Math.floor(-timeLeft % 60); */
+  /*   display = */
+  /*     String("00" + hour).slice(-2) + */
+  /*     ":" + */
+  /*     String("00" + minute).slice(-2) + */
+  /*     ":" + */
+  /*     String("00" + second).slice(-2); */
+  /* } */
+  /* return display; */
+  let hour = Math.floor(Math.abs(timeLeft) / 3600);
+  let minute = Math.floor((Math.abs(timeLeft) % 3600) / 60);
+  let second = Math.floor(Math.abs(timeLeft) % 60);
+  display =
+    String("00" + hour).slice(-2) +
+    ":" +
+    String("00" + minute).slice(-2) +
+    ":" +
+    String("00" + second).slice(-2);
+  return display;
 };
