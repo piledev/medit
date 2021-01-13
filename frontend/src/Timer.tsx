@@ -19,7 +19,6 @@ interface TimerProps {
 // return ないに {state} としておいて、
 // setState(仮)を１秒毎に書き換えるという手を使うといいかも。
 // useEffect で setInterval を行う必要はあるか？多分ないと思うが普通にやってだめだったときはやってみよう。
-// あああ
 //
 //
 const Timer = (props: TimerProps) => {
@@ -42,11 +41,7 @@ const Timer = (props: TimerProps) => {
     return () => clearInterval(intervalId);
   }, [timeLeft]);
 
-  return (
-    <div>
-      <h1>{getDisplay(meditLength, timeLeft)}</h1>
-    </div>
-  );
+  return <div dangerouslySetInnerHTML={getDisplay(meditLength, timeLeft)} />;
 };
 Timer.defaultProps = {
   hour: 0,
@@ -57,47 +52,35 @@ Timer.defaultProps = {
 export default Timer;
 
 // getDisplay:
-// meditLength: settings 画面で設定された瞑想時間（秒）
-// timeLeft: 瞑想完了までの残り時間（秒）
+// meditLength: settings 画面で設 定された瞑想時間（秒）
+// timeLeft: 瞑想完了までの残り時 間（秒）
 const getDisplay = (meditLength: number, timeLeft: number) => {
   let display = "";
   // 準備中の場合
   if (timeLeft > meditLength) {
     display = String(timeLeft - meditLength);
-    return display;
+    return { __html: display };
+    // 瞑想延長中の場合
+  } else if (timeLeft <= 0) {
+    let h = Math.floor(meditLength / 3600);
+    let m = Math.floor((meditLength % 3600) / 60);
+    let s = Math.floor(meditLength % 60);
+    display =
+      String("00" + h).slice(-2) +
+      ":" +
+      String("00" + m).slice(-2) +
+      ":" +
+      String("00" + s).slice(-2) +
+      "<br>";
   }
-  // 瞑想中の場合
-  /* } else if (timeLeft > 0) { */
-  /*   let hour = Math.floor(timeLeft / 3600); */
-  /*   let minute = Math.floor((timeLeft % 3600) / 60); */
-  /*   let second = Math.floor(timeLeft % 60); */
-  /*   display = */
-  /*     String("00" + hour).slice(-2) + */
-  /*     ":" + */
-  /*     String("00" + minute).slice(-2) + */
-  /*     ":" + */
-  /*     String("00" + second).slice(-2); */
-  /*   // 瞑想を延長している場合 */
-  /* } else { */
-  /*   let hour = Math.floor(-timeLeft / 3600); */
-  /*   let minute = Math.floor((-timeLeft % 3600) / 60); */
-  /*   let second = Math.floor(-timeLeft % 60); */
-  /*   display = */
-  /*     String("00" + hour).slice(-2) + */
-  /*     ":" + */
-  /*     String("00" + minute).slice(-2) + */
-  /*     ":" + */
-  /*     String("00" + second).slice(-2); */
-  /* } */
-  /* return display; */
   let hour = Math.floor(Math.abs(timeLeft) / 3600);
   let minute = Math.floor((Math.abs(timeLeft) % 3600) / 60);
   let second = Math.floor(Math.abs(timeLeft) % 60);
-  display =
+  display +=
     String("00" + hour).slice(-2) +
     ":" +
     String("00" + minute).slice(-2) +
     ":" +
     String("00" + second).slice(-2);
-  return display;
+  return { __html: display };
 };
